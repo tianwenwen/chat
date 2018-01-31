@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册页面</title>
+</head>
+<body>
+    <div class="container">
+        <label for="">用户名</label><input type="text" id="user"/>
+        <label for="">密码</label><input type="password" id="pass"/>
+        <button class="submit">提交</button>
+    </div>
+
+
+    <script src="http://localhost:8080/dep/jquery-1.9.1.min.js"></script>
+    <script>
+        $('.submit').on('click',function(){
+            var user = $('#user').val();
+            var pass = $('#pass').val();
+            if(pass && user){
+                $.ajax({
+                    headers: {
+                        Accept: "application/json; charset=utf-8"
+                    },
+                    url:'/req',
+                    data:{
+                        user:user,
+                        pass:pass
+                    },
+                    success(data){
+                        alert(data.msg);
+                        if(data.code == 2){
+                         console.log('chjenggon');
+                        }
+                    },
+                    error(err){
+                        alert('错了')
+                    }
+                })
+            }else{
+                alert('用户名或密码不能为空');
+            }
+        })
+    </script>
+</body>
+</html>
